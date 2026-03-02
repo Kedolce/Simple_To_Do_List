@@ -4,7 +4,7 @@ const daftarTugas = document.querySelector("#daftarCatatan");
 const inputHapus = document.querySelector("#inputDelete");
 const tombolHapus = document.querySelector("#deleteButton");
 
-tombolTambah.addEventListener("click", function () {
+function tambahTask() {
   const isiCatatan = inputText.value;
 
   if (isiCatatan === "") {
@@ -18,7 +18,15 @@ tombolTambah.addEventListener("click", function () {
   daftarTugas.appendChild(listBaru);
 
   inputText.value = "";
-});
+};
+
+tombolTambah.addEventListener("click", tambahTask);
+inputText.addEventListener("keypress", function (event){
+
+    if(event.key === "Enter"){
+      tambahTask();
+    }
+  });
 
 function hapusTask() {
     const inputNomorDel = parseInt(inputHapus.value);
@@ -36,11 +44,9 @@ function hapusTask() {
   }
 
   tombolHapus.addEventListener("click", hapusTask);
-
   inputHapus.addEventListener("keypress", function (event){
 
     if(event.key === "Enter"){
-      const daftarLi = daftarTugas.children;
       hapusTask();
     }
   });
