@@ -20,7 +20,7 @@ tombolTambah.addEventListener("click", function () {
   inputText.value = "";
 });
 
-tombolHapus.addEventListener("click", function () {
+function hapusTask() {
     const inputNomorDel = parseInt(inputHapus.value);
     const daftarLi = daftarTugas.children;
 
@@ -32,5 +32,15 @@ tombolHapus.addEventListener("click", function () {
     else{
         alert("Nomor tidak valid");
         return;
+    }
+  }
+
+  tombolHapus.addEventListener("click", hapusTask);
+
+  inputHapus.addEventListener("keypress", function (event){
+
+    if(event.key === "Enter"){
+      const daftarLi = daftarTugas.children;
+      hapusTask();
     }
   });
