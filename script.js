@@ -4,6 +4,8 @@ const daftarTugas = document.querySelector("#daftarCatatan");
 const inputHapus = document.querySelector("#inputDelete");
 const tombolHapus = document.querySelector("#deleteButton");
 
+let daftarData = [];
+
 function tambahTask() {
   const isiCatatan = inputText.value;
 
@@ -12,10 +14,13 @@ function tambahTask() {
     return;
   }
 
+  daftarData.push(isiCatatan);
+
   const listBaru = document.createElement("li");
   listBaru.innerText = isiCatatan;
-
   daftarTugas.appendChild(listBaru);
+
+  localStorage.setItem("semuaTugas", JSON.stringify(daftarData));
 
   inputText.value = "";
 };
@@ -50,3 +55,13 @@ function hapusTask() {
       hapusTask();
     }
   });
+
+
+  const listSemuaData = localStorage.getItem("semuaTugas");
+
+  if(listSemuaData){
+    const listLama = document.createElement("li");
+    listLama.innerText = listSemuaData;
+
+    daftarTugas.appendChild(listLama);
+  }
